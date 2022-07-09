@@ -2,7 +2,22 @@ import json
 
 
 class Reader:
+    """
+    Reader class is a wrapper around a json file. It provides methods to read the file, get the companion id, name,
+    messages, messages count, file name and messages dictionary.
+    """
     def __init__(self, file_name: str):
+        """
+        The __init__ function is called automatically every time the class is instantiated.
+        It sets up all the attributes that will be used by instances of this class.
+
+        :param self: Reference the object itself
+        :param file_name: str: Store the name of the file that is used to create this object
+        :raises: ValueError: If file is not a json file
+        :raises: ValueError: If file is not a telegram chat history
+        :raises: ValueError: If file is not a personal chat history
+        :return: None
+        """
         if not file_name.endswith('.json'):
             extension = file_name.split('.')[-1]
             raise ValueError(f"File must be json, not {extension}")
@@ -20,6 +35,15 @@ class Reader:
         self.__messages = self.read_messages()
 
     def read_messages(self) -> list:
+        """
+        The read_messages function reads the messages from a list of dictionaries and returns a list of strings.
+        The function takes one argument, which is the list of dictionaries that contain all the messages.
+        It iterates through each message in the dictionary and checks if it's from companion, if it's not empty and
+        if it's a string.
+
+        :param self: Access variables that belongs to the class
+        :return: A list of all the messages sent by the companion
+        """
         companion_messages = []
 
         for message in self.__messages_dict_list:
@@ -33,19 +57,56 @@ class Reader:
         return companion_messages
 
     def get_companion_id(self) -> str:
+        """
+        Returns the id of the companion object.
+
+        :param self: Access the attributes and methods of the class
+        :return: The id of the companion that is currently active
+        """
         return self.__companion_id
 
     def get_companion_name(self) -> str:
+        """
+        Returns the name of the companion.
+
+        :param self: Access the attributes and methods of the class
+        :return: The name of the companion
+        """
         return self.__companion_name
 
     def get_messages(self) -> list:
+        """
+        Retrieves messages in a list.
+
+        :param self: Refer to the object itself
+        :return: A list of all the messages from companion
+        """
         return self.__messages
 
     def get_messages_dict(self) -> list:
+        """
+        Returns a list of dictionaries, where each dictionary contains the information for one message. Basically,
+        it returns the actual messages that is stored in the initial json file.
+
+        :param self: Access the attributes and methods of the class in python
+        :return: A list dictionaries with message information
+        """
         return self.__messages_dict_list
 
     def get_messages_count(self) -> int:
+        """
+        Returns the number of messages in a chat.
+
+        :param self: Access the attributes and methods of the class in python
+        :return: The number of messages
+        """
         return len(self.__messages)
 
     def get_file_name(self) -> str:
+        """
+        Returns the name of the file that is currently open.
+
+        :param self: Refer to the object itself
+        :return: The name of the file
+        """
         return self.__file_name
