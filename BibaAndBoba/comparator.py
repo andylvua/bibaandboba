@@ -1,6 +1,6 @@
 from math import ceil
 
-from nltk_analyzer import NLTKAnalyzer
+from BibaAndBoba.nltk_analyzer import NLTKAnalyzer
 
 
 def max_correlation(n: int) -> float:

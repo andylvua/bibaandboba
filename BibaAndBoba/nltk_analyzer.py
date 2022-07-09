@@ -2,12 +2,17 @@ import pandas as pd
 from nltk.probability import FreqDist
 from nltk.tokenize import word_tokenize
 
-from reader import Reader
-from progress_bar import progress_bar
+from BibaAndBoba._reader import Reader
+from BibaAndBoba._progress_bar import progress_bar
+
+from importlib import resources
 
 FIRST_RUN = True
 STOPWORDS = ["ахах", "пхпх"]
-STOPWORDS_UA = set(open("dictionaries/base_ua.txt", "r", encoding='utf-8').read().split())
+
+
+with resources.open_binary('BibaAndBoba', "base_ua.txt") as base_ua:
+    STOPWORDS_UA = set(base_ua.read().split())
 
 
 def tokenize(messages: list[str], companion_name: str) -> list[str]:
@@ -25,12 +30,16 @@ def tokenize(messages: list[str], companion_name: str) -> list[str]:
 
 class NLTKAnalyzer:
     def __init__(self, path_to_file_1: str, path_to_file_2: str):
+        __file_1 = Reader(path_to_file_1)
+        __file_2 = Reader(path_to_file_2)
+        if __file_1.get_file_name() == __file_2.get_file_name():
+            raise ValueError("Files must be different")
+
         global FIRST_RUN
         if FIRST_RUN:
             print("Please wait for your files to be analyzed...")
             FIRST_RUN = False
-        __file_1 = Reader(path_to_file_1)
-        __file_2 = Reader(path_to_file_2)
+
         self.__messages_person_1 = __file_1.get_messages()
         self.__messages_person_2 = __file_2.get_messages()
         self.__person_1_name = __file_1.get_companion_name()

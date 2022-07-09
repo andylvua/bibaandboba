@@ -3,11 +3,20 @@ import json
 
 class Reader:
     def __init__(self, file_name: str):
+        if not file_name.endswith('.json'):
+            extension = file_name.split('.')[-1]
+            raise ValueError(f"File must be json, not {extension}")
+
+        __file = json.load(open(file_name, "rb"))
+        if not all(key in __file for key in ["id", "name", "messages"]):
+            raise E("Looks like you have a wrong json file or it's not a telegram chat history")
+        if __file["type"] != "personal_chat":
+            raise ValueError("You must use a personal chat history")
+
         self.__file_name = file_name
-        self.__file = json.load(open(file_name, "rb"))
-        self.__companion_id = str(self.__file["id"])
-        self.__companion_name = str(self.__file["name"])
-        self.__messages_dict_list = self.__file["messages"]
+        self.__companion_id = str(__file["id"])
+        self.__companion_name = str(__file["name"])
+        self.__messages_dict_list = __file["messages"]
         self.__messages = self.read_messages()
 
     def read_messages(self) -> list:
