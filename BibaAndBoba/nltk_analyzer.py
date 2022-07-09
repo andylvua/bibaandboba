@@ -1,18 +1,18 @@
 import pandas as pd
+import pkgutil
+
 from nltk.probability import FreqDist
 from nltk.tokenize import word_tokenize
 
 from BibaAndBoba._reader import Reader
 from BibaAndBoba._progress_bar import progress_bar
 
-from importlib import resources
-
 FIRST_RUN = True
-STOPWORDS = ["ахах", "пхпх"]
 
-
-with resources.open_binary('BibaAndBoba', "base_ua.txt") as base_ua:
-    STOPWORDS_UA = set(base_ua.read().split())
+stopwords = pkgutil.get_data(__name__, 'dictionaries/stopwords.txt')
+STOPWORDS = set(stopwords.decode('utf-8').split())
+base_ua = pkgutil.get_data(__name__, "dictionaries/base_ua.txt")
+STOPWORDS_UA = set(base_ua.decode('utf-8').split())
 
 
 def tokenize(messages: list[str], companion_name: str) -> list[str]:
