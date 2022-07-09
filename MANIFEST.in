@@ -1,1 +1,1 @@
-include BibaAndBoba/*.txt
+recursive-include BibaAndBoba *.txt
