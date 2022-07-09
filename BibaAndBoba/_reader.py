@@ -9,7 +9,7 @@ class Reader:
 
         __file = json.load(open(file_name, "rb"))
         if not all(key in __file for key in ["id", "name", "messages"]):
-            raise E("Looks like you have a wrong json file or it's not a telegram chat history")
+            raise ValueError("Looks like you have a wrong json file or it's not a telegram chat history")
         if __file["type"] != "personal_chat":
             raise ValueError("You must use a personal chat history")
 
