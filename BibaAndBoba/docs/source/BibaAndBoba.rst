@@ -4,7 +4,7 @@ BibaAndBoba package
 NLTKAnalyzer
 ---------------------------------
 
-.. automodule:: nltk_analyzer
+.. automodule:: BibaAndBoba.nltk_analyzer
    :members:
    :undoc-members:
    :show-inheritance:
@@ -13,7 +13,7 @@ NLTKAnalyzer
 Comparator
 -----------------------------
 
-.. automodule:: comparator
+.. automodule:: BibaAndBoba.comparator
    :members:
    :undoc-members:
    :show-inheritance:

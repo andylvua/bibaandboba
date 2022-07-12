@@ -116,7 +116,7 @@ Finding the correlation coefficient
 It's pretty easy to do.
 
 Create 2 objects for the people you want to find the correlation between and pass them to the
-:meth:`Comparator <comparator.Comparator>` class using the :meth:`~comparator.Comparator.get_correlation()` method.
+:meth:`Comparator <BibaAndBoba.comparator.Comparator>` class using the :meth:`~BibaAndBoba.comparator.Comparator.get_correlation()` method.
 
 .. code-block:: python
         :caption: Example
@@ -147,6 +147,6 @@ Contents
 
 Here you can find the complete documentation of the classes and methods used by BibaAndBoba.
 
-`NLTKAnalyzer <nltk_analyzer.NLTKAnalyzer>`_
+`NLTKAnalyzer <BibaAndBoba.nltk_analyzer.NLTKAnalyzer>`_
 
-`Comparator <comparator.Comparator>`_
+`Comparator <BibaAndBoba.comparator.Comparator>`_
