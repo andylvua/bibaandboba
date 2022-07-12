@@ -1,6 +1,6 @@
 from BibaAndBoba.comparator import Comparator
 from BibaAndBoba.biba_and_boba import BibaAndBoba
-from BibaAndBoba._reader import Reader
+from BibaAndBoba.utils.reader import Reader
 
 import logging
 
@@ -12,5 +12,5 @@ try:
 except LookupError:
     logging.warning("NLTK punkt tokenizer is not installed. Downloading...")
 
-    from BibaAndBoba._nltk_punkt_downloader import download_punkt
+    from BibaAndBoba.utils.nltk_punkt_downloader import download_punkt
     download_punkt()
