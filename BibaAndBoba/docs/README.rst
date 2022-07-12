@@ -147,8 +147,8 @@ Contents
 
 Here you can find the complete documentation of the classes and methods used by BibaAndBoba.
 
-:class:`~biba_and_boba.BibaAndBoba`
+:class:`~BibaAndBoba.biba_and_boba.BibaAndBoba`
 -----------------------------------
 
-:class:`~comparator.Comparator`
+:class:`~BibaAndBoba.comparator.Comparator`
 -------------------------------
