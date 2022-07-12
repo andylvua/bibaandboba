@@ -41,7 +41,8 @@ class NLTKAnalyzer:
     """
     NLTKAnalyzer is a class that for analyzing two Telegram chat history files.
     It provides a methods to get the difference words, the frequency distribution of the difference words,
-    and other parameters. Uses NLTK library to tokenize the messages. :class:`Reader` class is used to read the files.
+    and other parameters. Uses NLTK library to tokenize the messages. :class:`BibaAndBoba.Reader` class is used to read
+    the files.
     """
     def __init__(self, path_to_file_1: str, path_to_file_2: str):
         """
@@ -92,7 +93,8 @@ class NLTKAnalyzer:
 
     def freq_dist(self, limit: int = 10) -> pd.DataFrame:
         """
-        Takes a list of words, counts the frequency of each word, and returns a class:dataframe with the frequent ones.
+        Takes a list of words, counts the frequency of each word, and returns a :class:`pd.DataFrame` with the most
+        frequent ones.
 
         :param limit: The number of words to return, defaults to 10
         :type limit: int (optional)
@@ -100,6 +102,8 @@ class NLTKAnalyzer:
         """
         fdist = FreqDist(self.__difference_words)
         df = pd.DataFrame(fdist.most_common(limit), columns=['Word', 'Count'])
+
+        df["Quotient"] = (df["Count"] / len(self.__tokenized_person_1)) * 100
 
         return df
 

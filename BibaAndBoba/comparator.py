@@ -7,15 +7,15 @@ def max_correlation(n: int) -> float:
     """
     The max_correlation function computes the maximum correlation between two frequency dictributions.
 
-    :param n:int: Specify the length of the frequency distributions
+    :param n: :obj:`int`: Specify the length of the frequency distributions
     :return: The maximum correlation
     """
     i = 1
     s = 0
 
     for i in range(1, n + 1):
-        s = s + 1 / i
-    return s * 2
+        s += 1 / i
+    return s
 
 
 class Comparator:
@@ -45,7 +45,7 @@ class Comparator:
         for i, word_1 in enumerate(self.__person1_words):
             for j, word_2 in enumerate(self.__person2_words):
                 if word_1 == word_2:
-                    corr += (1/(i+1) + 1/(j+1))
+                    corr += (1/(i+1))
                     self.__same_words.add(word_1)
                 else:
                     continue
