@@ -147,6 +147,6 @@ Contents
 
 Here you can find the complete documentation of the classes and methods used by BibaAndBoba.
 
-`BibaAndBoba <BibaAndBoba.nltk_analyzer.BibaAndBoba>`_
+`BibaAndBoba <biba_and_boba.BibaAndBoba>`_
 
-`Comparator <BibaAndBoba.comparator.Comparator>`_
+`Comparator <comparator.Comparator>`_
