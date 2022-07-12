@@ -37,9 +37,9 @@ def tokenize(messages: list[str], companion_name: str) -> list[str]:
     return tokenized_list
 
 
-class NLTKAnalyzer:
+class BibaAndBoba:
     """
-    NLTKAnalyzer is a class that for analyzing two Telegram chat history files.
+    BibaAndBoba is a class that for analyzing two Telegram chat history files.
     It provides a methods to get the difference words, the frequency distribution of the difference words,
     and other parameters. Uses NLTK library to tokenize the messages. :class:`BibaAndBoba.Reader` class is used to read
     the files.

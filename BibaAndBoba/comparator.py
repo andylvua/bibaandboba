@@ -1,6 +1,6 @@
 from math import ceil
 
-from BibaAndBoba.nltk_analyzer import NLTKAnalyzer
+from BibaAndBoba.biba_and_boba import BibaAndBoba
 
 
 def max_correlation(n: int) -> float:
@@ -23,7 +23,7 @@ class Comparator:
     Comparator class is used to compare two people. It provides methods to get the correlation percentage of the two
     people and the words that are the same for both of them.
     """
-    def __init__(self, person1: NLTKAnalyzer, person2: NLTKAnalyzer, limit: int = 10):
+    def __init__(self, person1: BibaAndBoba, person2: BibaAndBoba, limit: int = 10):
         self.__person1_words = person1.freq_dist(limit=limit)['Word']
         self.__person2_words = person2.freq_dist(limit=limit)['Word']
         self.__person_1_name = person1.get_name()

@@ -94,16 +94,16 @@ Assuming you have the following project structure:
 For example, you want to find words that ``Pavlo`` uses often.
 At the same time, you know that the ``Roma`` hardly or not at all communicate with him - see `How to choose chats`_.
 
-BibaAndBoba uses the :meth:`NLTKAnalyzer <nltk_analyzer.NLTKAnalyzer>` class to analyze chat history files.
+BibaAndBoba uses the :meth:`BibaAndBoba <nltk_analyzer.BibaAndBoba>` class to analyze chat history files.
 
 .. code-block:: python
         :caption: Example
 
-        from BibaAndBoba import NLTKAnalyzer
+        from BibaAndBoba import BibaAndBoba
 
 
         def main():
-            pavlo = NLTKAnalyzer("resources/pavlo.json", "resources/roma.json")
+            pavlo = BibaAndBoba("resources/pavlo.json", "resources/roma.json")
 
             print(pavlo.freq_dist())
 
@@ -121,12 +121,12 @@ Create 2 objects for the people you want to find the correlation between and pas
 .. code-block:: python
         :caption: Example
 
-        from BibaAndBoba import NLTKAnalyzer, Comparator
+        from BibaAndBoba import BibaAndBoba, Comparator
 
 
         def main():
-            pavlo = NLTKAnalyzer("resources/pavlo.json", "resources/roma.json")
-            andrii = NLTKAnalyzer("resources/andrii.json", "resources/nasta.json")
+            pavlo = BibaAndBoba("resources/pavlo.json", "resources/roma.json")
+            andrii = BibaAndBoba("resources/andrii.json", "resources/nasta.json")
 
             correlation = Comparator(pavlo, andrii).get_correlation()
             print(correlation)
@@ -147,6 +147,6 @@ Contents
 
 Here you can find the complete documentation of the classes and methods used by BibaAndBoba.
 
-`NLTKAnalyzer <BibaAndBoba.nltk_analyzer.NLTKAnalyzer>`_
+`BibaAndBoba <BibaAndBoba.nltk_analyzer.BibaAndBoba>`_
 
 `Comparator <BibaAndBoba.comparator.Comparator>`_

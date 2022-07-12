@@ -1,7 +1,7 @@
 BibaAndBoba package
 ===================
 
-NLTKAnalyzer
+BibaAndBoba
 ---------------------------------
 
 .. automodule:: BibaAndBoba.nltk_analyzer

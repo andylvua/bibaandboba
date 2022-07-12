@@ -1,5 +1,5 @@
 from BibaAndBoba.comparator import Comparator
-from BibaAndBoba.nltk_analyzer import NLTKAnalyzer
+from BibaAndBoba.biba_and_boba import BibaAndBoba
 from BibaAndBoba._reader import Reader
 
 import logging
