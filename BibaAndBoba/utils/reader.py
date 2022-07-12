@@ -1,4 +1,24 @@
 import json
+from typing import Union, TextIO, BinaryIO
+from io import BufferedReader, BytesIO, TextIOWrapper
+
+FileInput = Union[str, bytes, BufferedReader, BinaryIO, BytesIO, TextIO]
+
+
+def parse_file_input(file: FileInput):
+    if isinstance(file, str):
+        if not file.endswith('.json'):
+            extension = file.split('.')[-1]
+            raise ValueError(f"File must be json, not {extension}")
+        return json.load(open(file, "rb"))
+    if isinstance(file, bytes):
+        return json.loads(file.decode("utf-8"))
+    if isinstance(file, BufferedReader):
+        return json.load(file)
+    if isinstance(file, BytesIO):
+        return json.loads(file.getvalue())
+    if isinstance(file, TextIOWrapper):
+        return json.load(file)
 
 
 class Reader:
@@ -6,29 +26,26 @@ class Reader:
     Reader class is a wrapper around a json file. It provides methods to read the file, get the companion id, name,
     messages, messages count, file name and messages dictionary.
     """
-    def __init__(self, file_name: str):
+    def __init__(self, file: FileInput):
         """
         The __init__ function is called automatically every time the class is instantiated.
         It sets up all the attributes that will be used by instances of this class.
 
         :param self: Reference the object itself
-        :param file_name: str: Store the name of the file that is used to create this object
+        :param file: :class:`str` | :class:`bytes` | :class:`BufferedReader` | \
+                :class:`BytesIO` | :class:`TextIO`:
+                Store the file that is used to create this object
         :raises: ValueError: If file is not a json file
         :raises: ValueError: If file is not a telegram chat history
         :raises: ValueError: If file is not a personal chat history
         :return: None
         """
-        if not file_name.endswith('.json'):
-            extension = file_name.split('.')[-1]
-            raise ValueError(f"File must be json, not {extension}")
-
-        __file = json.load(open(file_name, "rb"))
+        __file = parse_file_input(file)
         if not all(key in __file for key in ["id", "name", "messages"]):
             raise ValueError("Looks like you have a wrong json file or it's not a telegram chat history")
         if __file["type"] != "personal_chat":
             raise ValueError("You must use a personal chat history")
 
-        self.__file_name = file_name
         self.__companion_id = str(__file["id"])
         self.__companion_name = str(__file["name"])
         self.__messages_dict_list = __file["messages"]
@@ -101,12 +118,3 @@ class Reader:
         :return: The number of messages
         """
         return len(self.__messages)
-
-    def get_file_name(self) -> str:
-        """
-        Returns the name of the file that is currently open.
-
-        :param self: Refer to the object itself
-        :return: The name of the file
-        """
-        return self.__file_name

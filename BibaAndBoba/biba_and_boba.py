@@ -7,6 +7,8 @@ from nltk.tokenize import word_tokenize
 from BibaAndBoba.utils.reader import Reader
 from BibaAndBoba.utils.progress_bar import progress_bar
 
+from BibaAndBoba.utils.reader import FileInput
+
 print("Please wait for your files to be analyzed...")
 
 stopwords = pkgutil.get_data(__name__, 'dictionaries/stopwords.txt')
@@ -46,19 +48,19 @@ class BibaAndBoba:
     """
     cache = {}
 
-    def __init__(self, path_to_file_1: str, path_to_file_2: str):
+    def __init__(self, file_1: FileInput, file_2: FileInput):
         """
         The __init__ function is called when an instance of the class is created.
         It initializes all the variables that are unique to each instance.
 
         :param self: Reference the object itself
-        :param path_to_file_1:str: Specify the path to the first file
-        :param path_to_file_2:str: Pass the path to the second file
+        :param file_1: Specify the first file
+        :param file_2: Specify the second file
         :raises: ValueError: If files is identical
         """
-        __file_1 = Reader(path_to_file_1)
-        __file_2 = Reader(path_to_file_2)
-        if __file_1.get_file_name() == __file_2.get_file_name():
+        __file_1 = Reader(file_1)
+        __file_2 = Reader(file_2)
+        if __file_1.get_companion_id() == __file_2.get_companion_id():
             raise ValueError("Files must be different")
 
         self.__person_1_name = __file_1.get_companion_name()
