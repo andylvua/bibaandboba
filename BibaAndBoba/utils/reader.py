@@ -49,9 +49,9 @@ class Reader:
         self.__companion_id = str(file["id"])
         self.__companion_name = str(file["name"])
         self.__messages_dict_list = file["messages"]
-        self.__messages = self.read_messages()
+        self.__messages = self.__read_messages()
 
-    def read_messages(self) -> list:
+    def __read_messages(self) -> list:
         """
         The read_messages function reads the messages from a list of dictionaries and returns a list of strings.
         The function takes one argument, which is the list of dictionaries that contain all the messages.
