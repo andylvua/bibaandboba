@@ -121,7 +121,7 @@ class BibaAndBoba:
 
         return df
 
-    def get_words_person_1(self) -> list[str]:
+    def get_tokenized_words_person_1(self) -> list[str]:
         """
         Returns a list of all words in the message
         sent by person 1.
@@ -131,7 +131,7 @@ class BibaAndBoba:
         """
         return self.__tokenized_person_1
 
-    def get_words_person_2(self) -> list[str]:
+    def get_tokenized_words_person_2(self) -> list[str]:
         """
         Returns a list of all words in the message
         sent by person 2.
