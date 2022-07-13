@@ -1,7 +1,9 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://choosealicense.com/licenses/mit/)
 [![PyPI version](https://img.shields.io/pypi/v/BibaAndBoba)](https://pypi.org/project/BibaAndBoba/)
-[![Documentation Status](https://readthedocs.org/projects/bibaandboba/badge/?version=latest)](https://bibaandboba.readthedocs.io/en/latest/?badge=latest)
 [![Sphinx 5.0.2](https://img.shields.io/badge/Sphinx-5.0.2-orange)](https://www.sphinx-doc.org/en/master/)
+
+[![Python application](https://github.com/andylvua/BibaAndBoba/actions/workflows/python-app.yml/badge.svg?branch=main)](https://github.com/andylvua/BibaAndBoba/actions/workflows/python-app.yml)
+[![Documentation Status](https://readthedocs.org/projects/bibaandboba/badge/?version=latest)](https://bibaandboba.readthedocs.io/en/latest/?badge=latest)
 
 ## BibaAndBoba
 Python package for analyzing Telegram chats and finding correlations between people
