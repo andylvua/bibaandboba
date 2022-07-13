@@ -1,0 +1,39 @@
+{
+  "name": "Андрій",
+  "type": "personal_chat",
+  "id": 483571608,
+  "messages": [
+    {
+      "id": 5427,
+      "type": "message",
+      "date": "2019-05-13T10:20:03",
+      "from": "Андрій",
+      "from_id": "user483571608",
+      "text": "Hi"
+    },
+    {
+      "id": 5429,
+      "type": "message",
+      "date": "2019-05-13T10:20:12",
+      "from": "Pavlo Kryven",
+      "from_id": "user512531115",
+      "text": "Привіт"
+    },
+    {
+      "id": 6018,
+      "type": "message",
+      "date": "2019-06-09T19:29:32",
+      "from": "Андрій",
+      "from_id": "user483571608",
+      "text": "Павло"
+    },
+    {
+      "id": 6021,
+      "type": "message",
+      "date": "2019-06-09T19:29:50",
+      "from": "Pavlo Kryven",
+      "from_id": "user512531115",
+      "text": "Андрій"
+    }
+  ]
+}

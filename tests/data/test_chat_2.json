@@ -1,0 +1,43 @@
+{
+  "name": "Павло",
+  "type": "personal_chat",
+  "id": 512531115,
+  "messages": [
+    {
+      "id": 1007082,
+      "type": "message",
+      "date": "2021-03-10T14:55:11",
+      "date_unixtime": "1615377311",
+      "from": "Андрій",
+      "from_id": "user483571608",
+      "text": "Привіт"
+    },
+    {
+      "id": 1007083,
+      "type": "message",
+      "date": "2021-03-10T14:55:14",
+      "date_unixtime": "1615377314",
+      "from": "Андрій",
+      "from_id": "user483571608",
+      "text": "Як справи?"
+    },
+    {
+      "id": 1007084,
+      "type": "message",
+      "date": "2021-03-10T14:55:23",
+      "date_unixtime": "1615377323",
+      "from": "Павло",
+      "from_id": "user512531115",
+      "text": "Дороу"
+    },
+    {
+      "id": 1007085,
+      "type": "message",
+      "date": "2021-03-10T14:55:28",
+      "date_unixtime": "1615377328",
+      "from": "Павло",
+      "from_id": "user512531115",
+      "text": "Добре"
+    }
+  ]
+}
