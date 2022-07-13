@@ -46,6 +46,8 @@ class BibaAndBoba:
     and other parameters. Uses NLTK library to tokenize the messages. :class:`BibaAndBoba.Reader` class is used to read
     the files.
     """
+
+    # A cache variable that is shared by all instances of the class and is used to store the tokenized messages
     __cache = {}
 
     def __init__(self, file_1: FileInput, file_2: FileInput):
@@ -65,6 +67,7 @@ class BibaAndBoba:
 
         self.__person_1_name = file_1.get_companion_name()
         self.__person_2_name = file_2.get_companion_name()
+
         if file_1.get_companion_id() in self.__cache:
             print(f"{format(self.__person_1_name)} messages are already analyzed. Using cached data")
             self.__tokenized_person_1 = self.__cache[file_1.get_companion_id()]
@@ -77,6 +80,7 @@ class BibaAndBoba:
         else:
             self.__messages_person_2 = file_2.get_messages()
             self.__tokenized_person_2 = tokenize(self.__messages_person_2, self.__person_2_name)
+
         self.__difference_words = self.__substraction()
 
         self.__cache[file_1.get_companion_id()] = self.__tokenized_person_1
