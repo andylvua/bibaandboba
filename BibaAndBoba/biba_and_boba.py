@@ -46,7 +46,7 @@ class BibaAndBoba:
     and other parameters. Uses NLTK library to tokenize the messages. :class:`BibaAndBoba.Reader` class is used to read
     the files.
     """
-    cache = {}
+    __cache = {}
 
     def __init__(self, file_1: FileInput, file_2: FileInput):
         """
@@ -58,29 +58,29 @@ class BibaAndBoba:
         :param file_2: Specify the second file
         :raises: ValueError: If files is identical
         """
-        __file_1 = Reader(file_1)
-        __file_2 = Reader(file_2)
-        if __file_1.get_companion_id() == __file_2.get_companion_id():
+        file_1 = Reader(file_1)
+        file_2 = Reader(file_2)
+        if file_1.get_companion_id() == file_2.get_companion_id():
             raise ValueError("Files must be different")
 
-        self.__person_1_name = __file_1.get_companion_name()
-        self.__person_2_name = __file_2.get_companion_name()
-        if __file_1.get_companion_id() in self.cache:
+        self.__person_1_name = file_1.get_companion_name()
+        self.__person_2_name = file_2.get_companion_name()
+        if file_1.get_companion_id() in self.__cache:
             print(f"{format(self.__person_1_name)} messages are already analyzed. Using cached data")
-            self.__tokenized_person_1 = self.cache[__file_1.get_companion_id()]
+            self.__tokenized_person_1 = self.__cache[file_1.get_companion_id()]
         else:
-            self.__messages_person_1 = __file_1.get_messages()
+            self.__messages_person_1 = file_1.get_messages()
             self.__tokenized_person_1 = tokenize(self.__messages_person_1, self.__person_1_name)
-        if __file_2.get_companion_id() in self.cache:
+        if file_2.get_companion_id() in self.__cache:
             print(f"{format(self.__person_2_name)} messages are already analyzed. Using cached data")
-            self.__tokenized_person_2 = self.cache[__file_2.get_companion_id()]
+            self.__tokenized_person_2 = self.__cache[file_2.get_companion_id()]
         else:
-            self.__messages_person_2 = __file_2.get_messages()
+            self.__messages_person_2 = file_2.get_messages()
             self.__tokenized_person_2 = tokenize(self.__messages_person_2, self.__person_2_name)
         self.__difference_words = self.__substraction()
 
-        self.cache[__file_1.get_companion_id()] = self.__tokenized_person_1
-        self.cache[__file_2.get_companion_id()] = self.__tokenized_person_2
+        self.__cache[file_1.get_companion_id()] = self.__tokenized_person_1
+        self.__cache[file_2.get_companion_id()] = self.__tokenized_person_2
 
     def __substraction(self) -> list[str]:
         """

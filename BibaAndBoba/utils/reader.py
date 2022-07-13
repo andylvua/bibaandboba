@@ -40,15 +40,15 @@ class Reader:
         :raises: ValueError: If file is not a personal chat history
         :return: None
         """
-        __file = parse_file_input(file)
-        if not all(key in __file for key in ["id", "name", "messages"]):
+        file = parse_file_input(file)
+        if not all(key in file for key in ["id", "name", "messages"]):
             raise ValueError("Looks like you have a wrong json file or it's not a telegram chat history")
-        if __file["type"] != "personal_chat":
+        if file["type"] != "personal_chat":
             raise ValueError("You must use a personal chat history")
 
-        self.__companion_id = str(__file["id"])
-        self.__companion_name = str(__file["name"])
-        self.__messages_dict_list = __file["messages"]
+        self.__companion_id = str(file["id"])
+        self.__companion_name = str(file["name"])
+        self.__messages_dict_list = file["messages"]
         self.__messages = self.read_messages()
 
     def read_messages(self) -> list:
