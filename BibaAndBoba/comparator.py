@@ -24,11 +24,11 @@ class Comparator:
     people and the words that are the same for both of them.
     """
     def __init__(self, person1: BibaAndBoba, person2: BibaAndBoba, limit: int = 10):
-        self.__person1_words = person1.freq_dist(limit=limit)['Word']
-        self.__person2_words = person2.freq_dist(limit=limit)['Word']
+        self.__person1_freq_dist = person1.freq_dist(limit=limit)
+        self.__person2_freq_dist = person2.freq_dist(limit=limit)
         self.__person_1_name = person1.get_name()
         self.__person_2_name = person2.get_name()
-        self.__max_correlation = max_correlation(len(self.__person1_words))
+        self.__max_correlation = max_correlation(len(self.__person1_freq_dist["Word"]))
         self.__same_words = set()
         self.__correlation_percent = self.__correlation()
 
@@ -42,15 +42,23 @@ class Comparator:
         :return: The correlation between two people
         """
         corr = 0
-        for i, word_1 in enumerate(self.__person1_words):
-            for j, word_2 in enumerate(self.__person2_words):
+        quotients_person1 = self.__person1_freq_dist["Quotient"]
+        quotients_person2 = self.__person2_freq_dist["Quotient"]
+
+        for i, word_1 in enumerate(self.__person1_freq_dist["Word"]):
+            for j, word_2 in enumerate(self.__person2_freq_dist["Word"]):
                 if word_1 == word_2:
-                    corr += (1/(i+1))
+                    quotient_diff = abs(quotients_person1[i] - quotients_person2[j])
+                    print(word_1, word_2)
+                    if quotient_diff > 0.15:
+                        corr += (1 / (i + 1)) - quotient_diff
+                    else:
+                        corr += (1 / (i + 1))
                     self.__same_words.add(word_1)
                 else:
                     continue
 
-        result = (corr/self.__max_correlation)*100
+        result = (corr / self.__max_correlation) * 100
         return ceil(result)
 
     def get_correlation(self) -> float:
