@@ -5,7 +5,7 @@ from io import BufferedReader, BytesIO, TextIOWrapper
 FileInput = Union[str, bytes, BufferedReader, BinaryIO, BytesIO, TextIO]
 
 
-def parse_file_input(file: FileInput):
+def _parse_file_input(file: FileInput):
     if isinstance(file, str):
         if not file.endswith('.json'):
             extension = file.split('.')[-1]
@@ -40,7 +40,7 @@ class Reader:
         :raises: ValueError: If file is not a personal chat history
         :return: None
         """
-        file = parse_file_input(file)
+        file = _parse_file_input(file)
         if not all(key in file for key in ["id", "name", "messages"]):
             raise ValueError("Looks like you have a wrong json file or it's not a telegram chat history")
         if file["type"] != "personal_chat":

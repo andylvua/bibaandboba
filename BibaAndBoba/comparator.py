@@ -3,7 +3,7 @@ from math import ceil
 from BibaAndBoba.biba_and_boba import BibaAndBoba
 
 
-def max_correlation(n: int) -> float:
+def _max_correlation(n: int) -> float:
     """
     The max_correlation function computes the maximum correlation between two frequency dictributions.
 
@@ -24,11 +24,16 @@ class Comparator:
     people and the words that are the same for both of them.
     """
     def __init__(self, person1: BibaAndBoba, person2: BibaAndBoba, limit: int = 10):
+        if not isinstance(person1, BibaAndBoba):
+            raise TypeError("You must pass a BibaAndBoba object as the argument")
+        if not isinstance(person2, BibaAndBoba):
+            raise TypeError("You must pass a BibaAndBoba object as the argument")
+
         self.__person1_freq_dist = person1.freq_dist(limit=limit)
         self.__person2_freq_dist = person2.freq_dist(limit=limit)
         self.__person_1_name = person1.get_name()
         self.__person_2_name = person2.get_name()
-        self.__max_correlation = max_correlation(len(self.__person1_freq_dist["Word"]))
+        self.__max_correlation = _max_correlation(len(self.__person1_freq_dist["Word"]))
         self.__same_words = set()
         self.__correlation_percent = self.__correlation()
 
@@ -49,7 +54,6 @@ class Comparator:
             for j, word_2 in enumerate(self.__person2_freq_dist["Word"]):
                 if word_1 == word_2:
                     quotient_diff = abs(quotients_person1[i] - quotients_person2[j])
-                    print(word_1, word_2)
                     if quotient_diff > 0.15:
                         corr += (1 / (i + 1)) - quotient_diff
                     else:
