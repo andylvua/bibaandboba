@@ -1,12 +1,12 @@
+# BibaAndBoba
+Python package for analyzing Telegram chats and finding correlations between people
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://choosealicense.com/licenses/mit/)
 [![PyPI version](https://img.shields.io/pypi/v/BibaAndBoba)](https://pypi.org/project/BibaAndBoba/)
 [![Sphinx 5.0.2](https://img.shields.io/badge/Sphinx-5.0.2-orange)](https://www.sphinx-doc.org/en/master/)
 
 [![Python application](https://github.com/andylvua/BibaAndBoba/actions/workflows/python-app.yml/badge.svg?branch=main)](https://github.com/andylvua/BibaAndBoba/actions/workflows/python-app.yml)
 [![Documentation Status](https://readthedocs.org/projects/bibaandboba/badge/?version=latest)](https://bibaandboba.readthedocs.io/en/latest/?badge=latest)
-
-## BibaAndBoba
-Python package for analyzing Telegram chats and finding correlations between people
 
 ## About
 
@@ -70,19 +70,19 @@ possible.
 
 Find the three dots menu, and select the `Export chat history` option:
 
-<img src="BibaAndBoba/docs/assets/exporting-0.png" width="300">
+<img src="https://raw.githubusercontent.com/andylvua/BibaAndBoba/main/BibaAndBoba/docs/assets/exporting-0.png" width="300">
 
 2.  **Configure chat export settings as shown below.**
 
 -   Disable the `Photos` option.
 -   Set `Size limit` to 500 MB.
 
-<img src="BibaAndBoba/docs/assets/exporting-1.png" width="300">
+<img src="https://raw.githubusercontent.com/andylvua/BibaAndBoba/main/BibaAndBoba/docs/assets/exporting-1.png" width="300">
 
 -   Set `Format` to `Machine-readable JSON`.
 -   Set `Path` to your desired export directory.
 
-<img src="BibaAndBoba/docs/assets/exporting-2.png" width="300">
+<img src="https://raw.githubusercontent.com/andylvua/BibaAndBoba/main/BibaAndBoba/docs/assets/exporting-2.png" width="300">
 
 **Click** `Export` and wait for the export to finish.
 
@@ -101,7 +101,7 @@ Now we are ready to go.
 
 Assuming you have the following project structure:
 
-<img src="BibaAndBoba/docs/assets/project-structure.png" width="300">
+<img src="https://raw.githubusercontent.com/andylvua/BibaAndBoba/main/BibaAndBoba/docs/assets/project-structure.png" width="300">
 
 For example, you want to find words that `Pavlo` uses often. At the same
 time, you know that the `Roma` hardly or not at all communicate with him - see [How to choose chats](#how-to-choose-chats).
