@@ -17,7 +17,7 @@ base_ua = pkgutil.get_data(__name__, "dictionaries/base_ua.txt")
 STOPWORDS_UA = set(base_ua.decode('utf-8').split())
 
 
-def tokenize(messages: list[str], companion_name: str) -> list[str]:
+def _tokenize(messages: list[str], companion_name: str = "Undefined") -> list[str]:
     """
     The tokenize function takes a list of messages and a companion name as arguments.
     It then tokenizes each message in the list and removes stopwords.
@@ -28,6 +28,9 @@ def tokenize(messages: list[str], companion_name: str) -> list[str]:
     :return: A list of strings
     """
     tokenized_list = []
+
+    if len(messages) == 0:
+        return []
 
     for message in progress_bar(messages, prefix=f'Analyzing {companion_name} messages:'):
         tokenized = word_tokenize(message)
@@ -73,13 +76,13 @@ class BibaAndBoba:
             self.__tokenized_person_1 = self.__cache[file_1.get_companion_id()]
         else:
             self.__messages_person_1 = file_1.get_messages()
-            self.__tokenized_person_1 = tokenize(self.__messages_person_1, self.__person_1_name)
+            self.__tokenized_person_1 = _tokenize(self.__messages_person_1, self.__person_1_name)
         if file_2.get_companion_id() in self.__cache:
             print(f"{format(self.__person_2_name)} messages are already analyzed. Using cached data")
             self.__tokenized_person_2 = self.__cache[file_2.get_companion_id()]
         else:
             self.__messages_person_2 = file_2.get_messages()
-            self.__tokenized_person_2 = tokenize(self.__messages_person_2, self.__person_2_name)
+            self.__tokenized_person_2 = _tokenize(self.__messages_person_2, self.__person_2_name)
 
         self.__difference_words = self.__substraction()
 

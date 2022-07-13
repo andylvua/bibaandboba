@@ -13,7 +13,7 @@ def parse_file_input(file: FileInput):
         return json.load(open(file, "rb"))
     if isinstance(file, bytes):
         return json.loads(file.decode("utf-8"))
-    if isinstance(file, BufferedReader):
+    if isinstance(file, (BufferedReader, TextIOWrapper)):
         return json.load(file)
     if isinstance(file, BytesIO):
         return json.loads(file.getvalue())
