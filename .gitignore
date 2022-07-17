@@ -142,3 +142,4 @@ cython_debug/
 /recources
 /.idea
 main.py
+*/cache
