@@ -27,7 +27,7 @@ def cache_file_path(companion_id: str) -> Path:
     return cache_file
 
 
-def check_chache_file(companion_id: str) -> bool:
+def check_cache_file(companion_id: str) -> bool:
     """
     Checks if the cache file is not empty.
     If it's not empty, it returns True. If not, it returns False.
@@ -49,7 +49,7 @@ def get_cache(companion_id: str) -> list:
     """
     cache_file = cache_file_path(companion_id)
 
-    if check_chache_file(companion_id):
+    if check_cache_file(companion_id):
         with open(cache_file, "rb") as cf:
             cache = pickle.load(cf)
     else:
@@ -81,6 +81,7 @@ def cache_to_file() -> callable:
         :param func: Call the function that is being wrapped
         :return: A function that uses a cache
         """
+
         @wraps(func)
         def wrapper(*args, **kwargs) -> list:
             """
