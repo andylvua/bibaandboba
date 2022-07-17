@@ -1,45 +1,11 @@
+import logging
+
 import pandas as pd
-import pkgutil
-
 from nltk.probability import FreqDist
-from nltk.tokenize import word_tokenize
-
-from BibaAndBoba.utils.reader import Reader
-from BibaAndBoba.utils.progress_bar import progress_bar
 
 from BibaAndBoba.utils.reader import FileInput
-
-print("Please wait for your files to be analyzed...")
-
-stopwords = pkgutil.get_data(__name__, 'dictionaries/stopwords.txt')
-STOPWORDS = set(stopwords.decode('utf-8').split())
-base_ua = pkgutil.get_data(__name__, "dictionaries/base_ua.txt")
-STOPWORDS_UA = set(base_ua.decode('utf-8').split())
-
-
-def _tokenize(messages: list[str], companion_name: str = "Undefined") -> list[str]:
-    """
-    The tokenize function takes a list of messages and a companion name as arguments.
-    It then tokenizes each message in the list and removes stopwords.
-    The function returns list of generated tokens or simply separate words.
-
-    :param messages: list[str]: Pass a list of messages to the function
-    :param companion_name: str: The name of the companion that will be shown in a progress bar
-    :return: A list of strings
-    """
-    tokenized_list = []
-
-    if len(messages) == 0:
-        return []
-
-    for message in progress_bar(messages, prefix=f'Analyzing {companion_name} messages:'):
-        tokenized = word_tokenize(message)
-        for token in tokenized:
-            token = token.lower()
-            if token not in STOPWORDS_UA and not any(word in token for word in STOPWORDS):
-                tokenized_list.append(token)
-
-    return tokenized_list
+from BibaAndBoba.utils.reader import Reader
+from BibaAndBoba.utils.tokenizer import tokenize
 
 
 class BibaAndBoba:
@@ -50,10 +16,7 @@ class BibaAndBoba:
     the files.
     """
 
-    # A cache variable that is shared by all instances of the class and is used to store the tokenized messages
-    __cache = {}
-
-    def __init__(self, file_1: FileInput, file_2: FileInput):
+    def __init__(self, file_1: FileInput, file_2: FileInput, use_cache: bool = True, flush_cache: bool = False):
         """
         The __init__ function is called when an instance of the class is created.
         It initializes all the variables that are unique to each instance.
@@ -63,31 +26,29 @@ class BibaAndBoba:
         :param file_2: Specify the second file
         :raises: ValueError: If files is identical
         """
+        if not use_cache:
+            logging.info("Warning, cache is disabled. This may significantly slow down the process.\n")
+
         file_1 = Reader(file_1)
         file_2 = Reader(file_2)
-        if file_1.get_companion_id() == file_2.get_companion_id():
-            raise ValueError("Files must be different")
+        file_1_companion_id = file_1.get_companion_id()
+        file_2_companion_id = file_2.get_companion_id()
+
+        if file_1_companion_id == file_2_companion_id:
+            raise ValueError("Interlocutors must be different")
 
         self.__person_1_name = file_1.get_companion_name()
         self.__person_2_name = file_2.get_companion_name()
 
-        if file_1.get_companion_id() in self.__cache:
-            print(f"{format(self.__person_1_name)} messages are already analyzed. Using cached data")
-            self.__tokenized_person_1 = self.__cache[file_1.get_companion_id()]
-        else:
-            self.__messages_person_1 = file_1.get_messages()
-            self.__tokenized_person_1 = _tokenize(self.__messages_person_1, self.__person_1_name)
-        if file_2.get_companion_id() in self.__cache:
-            print(f"{format(self.__person_2_name)} messages are already analyzed. Using cached data")
-            self.__tokenized_person_2 = self.__cache[file_2.get_companion_id()]
-        else:
-            self.__messages_person_2 = file_2.get_messages()
-            self.__tokenized_person_2 = _tokenize(self.__messages_person_2, self.__person_2_name)
+        self.__messages_person_1 = file_1.get_messages()
+        self.__tokenized_person_1 = tokenize(self.__messages_person_1, file_1_companion_id, self.__person_1_name,
+                                             use_cache=use_cache, flush_cache=flush_cache)
+
+        self.__messages_person_2 = file_2.get_messages()
+        self.__tokenized_person_2 = tokenize(self.__messages_person_2, file_2_companion_id, self.__person_2_name,
+                                             use_cache=use_cache, flush_cache=flush_cache)
 
         self.__difference_words = self.__substraction()
-
-        self.__cache[file_1.get_companion_id()] = self.__tokenized_person_1
-        self.__cache[file_2.get_companion_id()] = self.__tokenized_person_2
 
     def __substraction(self) -> list[str]:
         """
