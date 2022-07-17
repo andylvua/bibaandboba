@@ -3,7 +3,8 @@ Important! This module downloads the punkt tokenizer from NLTK.
 """
 import nltk
 import ssl
-import logging
+
+from BibaAndBoba.utils.logger import logger
 
 
 def download_punkt():
@@ -15,7 +16,7 @@ def download_punkt():
         ssl._create_default_https_context = _create_unverified_https_context
 
     nltk.download("punkt")
-    logging.info("Successfully downloaded punkt tokenizer from NLTK.")
+    logger.info("Successfully downloaded punkt tokenizer from NLTK.")
 
 
 if __name__ == "__main__":

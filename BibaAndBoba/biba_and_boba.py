@@ -1,11 +1,11 @@
-import logging
-
 import pandas as pd
 from nltk.probability import FreqDist
 
 from BibaAndBoba.utils.reader import FileInput
 from BibaAndBoba.utils.reader import Reader
 from BibaAndBoba.utils.tokenizer import tokenize
+
+from BibaAndBoba.utils.logger import logger
 
 
 class BibaAndBoba:
@@ -27,7 +27,7 @@ class BibaAndBoba:
         :raises: ValueError: If files is identical
         """
         if not use_cache:
-            logging.info("Warning, cache is disabled. This may significantly slow down the process.\n")
+            logger.warning("Warning, cache is disabled. This may significantly slow down the process.\n")
 
         file_1 = Reader(file_1)
         file_2 = Reader(file_2)

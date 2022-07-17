@@ -1,8 +1,9 @@
-import logging
 import pickle
 import os
 from functools import wraps
 from pathlib import Path
+
+from BibaAndBoba.utils.logger import logger
 
 # Creates a cache directory called BibaAndBoba/cache.
 CACHE_DIR_PATH = Path("BibaAndBoba/cache")
@@ -103,13 +104,13 @@ def cache_to_file() -> callable:
             cache = get_cache(companion_id)
 
             if flush_cache:
-                logging.info(f"Flushing cache...\n")
+                logger.info(f"Flushing cache...")
                 cache = []
 
             if cache:
-                logging.info(f"Messages from {companion_name} are already analyzed. Using cache."
-                             f"\nIf you want to clear the cache, please specify flush_cache=True "
-                             f"when creating an instance of BibaAndBoba.\n")
+                logger.info(f"Messages from {companion_name} are already analyzed. Using cache."
+                            f"\nIf you want to clear the cache, please specify flush_cache=True "
+                            f"when creating an instance of BibaAndBoba.\n")
                 return cache
 
             tokenized_messages = func(*args, **kwargs)
