@@ -2,4 +2,4 @@ pandas==1.4.3
 nltk~=3.7
 setuptools~=63.1.0
 pytest~=7.1.2
-BibaAndBoba~=1.1.0
+BibaAndBoba==1.1.2
