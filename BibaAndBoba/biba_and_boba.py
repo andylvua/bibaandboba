@@ -48,11 +48,11 @@ class BibaAndBoba:
         self.__tokenized_person_2 = tokenize(self.__messages_person_2, file_2_companion_id, self.__person_2_name,
                                              use_cache=use_cache, flush_cache=flush_cache)
 
-        self.__difference_words = self.__substraction()
+        self.__difference_words = self.__subtraction()
 
-    def __substraction(self) -> list[str]:
+    def __subtraction(self) -> list[str]:
         """
-        The __substraction function takes two lists of strings as input.
+        The __subtraction function takes two lists of strings as input.
         It returns a list of words that are in the first list but not in the second.
 
         :param self: Access variables that belongs to the class
