@@ -139,7 +139,7 @@ dmypy.json
 cython_debug/
 
 *_test.py
-/recources
+/resources
 /.idea
 main.py
 */cache
