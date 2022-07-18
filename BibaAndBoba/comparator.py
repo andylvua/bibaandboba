@@ -29,8 +29,8 @@ class Comparator:
         if not isinstance(person2, BibaAndBoba):
             raise TypeError("You must pass a BibaAndBoba object as the argument")
 
-        self.__person1_freq_dist = person1.freq_dist(limit=limit)
-        self.__person2_freq_dist = person2.freq_dist(limit=limit)
+        self.__person1_freq_dist = person1.parasite_words(limit=limit)
+        self.__person2_freq_dist = person2.parasite_words(limit=limit)
         self.__person_1_name = person1.get_name()
         self.__person_2_name = person2.get_name()
         self.__max_correlation = _max_correlation(len(self.__person1_freq_dist["Word"]))

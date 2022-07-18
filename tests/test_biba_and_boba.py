@@ -3,7 +3,7 @@ from pandas.testing import assert_frame_equal
 
 
 def test_freq_dist(biba_and_boba):
-    freq_dist_actual = biba_and_boba.freq_dist()
+    freq_dist_actual = biba_and_boba.parasite_words()
     freq_dist_expected = pd.DataFrame(
         {
             'Word': ["hi", "павло"],

@@ -69,7 +69,7 @@ class BibaAndBoba:
 
         return difference_words
 
-    def freq_dist(self, limit: int = 10) -> pd.DataFrame:
+    def parasite_words(self, limit: int = 10) -> pd.DataFrame:
         """
         Takes a list of words, counts the frequency of each word, and returns a :class:`pd.DataFrame` with the most
         frequent ones.
