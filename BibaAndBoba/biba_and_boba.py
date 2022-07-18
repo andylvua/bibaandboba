@@ -16,7 +16,8 @@ class BibaAndBoba:
     the files.
     """
 
-    def __init__(self, file_1: FileInput, file_2: FileInput, use_cache: bool = True, flush_cache: bool = False):
+    def __init__(self, file_1: FileInput, file_2: FileInput, subtraction_threshold: int = 3,
+                 use_cache: bool = True, flush_cache: bool = False):
         """
         The __init__ function is called when an instance of the class is created.
         It initializes all the variables that are unique to each instance.
@@ -24,6 +25,13 @@ class BibaAndBoba:
         :param self: Reference the object itself
         :param file_1: Specify the first file
         :param file_2: Specify the second file
+        :param subtraction_threshold: The threshold for the subtraction function, defaults to 3. It's not
+            recommended to use a value bigger than 3 unless you need to.
+        :type subtraction_threshold: int (optional)
+        :param use_cache: Whether to use the cache or not, defaults to True
+        :type use_cache: bool (optional)
+        :param flush_cache: Whether to flush the cache or not, defaults to False
+        :type flush_cache: bool (optional)
         :raises: ValueError: If files is identical
         """
         if not use_cache:
@@ -40,31 +48,29 @@ class BibaAndBoba:
         self.__person_1_name = file_1.get_companion_name()
         self.__person_2_name = file_2.get_companion_name()
 
-        self.__messages_person_1 = file_1.get_messages()
-        self.__tokenized_person_1 = tokenize(self.__messages_person_1, file_1_companion_id, self.__person_1_name,
+        self.__tokenized_person_1 = tokenize(file_1.get_messages(), file_1_companion_id, self.__person_1_name,
                                              use_cache=use_cache, flush_cache=flush_cache)
 
-        self.__messages_person_2 = file_2.get_messages()
-        self.__tokenized_person_2 = tokenize(self.__messages_person_2, file_2_companion_id, self.__person_2_name,
+        self.__tokenized_person_2 = tokenize(file_2.get_messages(), file_2_companion_id, self.__person_2_name,
                                              use_cache=use_cache, flush_cache=flush_cache)
 
-        self.__difference_words = self.__subtraction()
+        self.__difference_words = self.__subtraction(threshold=subtraction_threshold)
 
-    def __subtraction(self) -> list[str]:
+    def __subtraction(self, threshold: int) -> list[str]:
         """
         The __subtraction function takes two lists of strings as input.
         It returns a list of words that are in the first list but not in the second.
 
         :param self: Access variables that belongs to the class
         :return: A list of words that are present in the minuend but not in the subtrahend
-        :doc-author: Trelent
         """
         messages_minuend = self.__tokenized_person_1
-        messages_subtrahend = set(self.__tokenized_person_2)
+        subtrahend_freq_dist = FreqDist(self.__tokenized_person_2)
+
         difference_words = []
 
         for word in messages_minuend:
-            if word not in messages_subtrahend:
+            if subtrahend_freq_dist.get(word, 0) < threshold:
                 difference_words.append(word)
 
         return difference_words
