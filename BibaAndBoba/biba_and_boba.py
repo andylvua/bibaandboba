@@ -32,7 +32,7 @@ class BibaAndBoba:
         :type use_cache: bool (optional)
         :param flush_cache: Whether to flush the cache or not, defaults to False
         :type flush_cache: bool (optional)
-        :raises: ValueError: If files is identical
+        :raises: ValueError: If files are identical
         """
         if not use_cache:
             logger.warning("Warning, cache is disabled. This may significantly slow down the process.\n")
