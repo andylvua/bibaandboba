@@ -21,7 +21,7 @@ copyright = '2022, Andrew Yaroshevych'
 author = 'Andrew Yaroshevych'
 
 # The full version, including alpha/beta/rc tags
-release = '1.1.2'
+release = '1.2.2'
 
 
 # -- General configuration ---------------------------------------------------
