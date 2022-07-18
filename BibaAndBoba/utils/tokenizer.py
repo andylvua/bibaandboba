@@ -14,6 +14,7 @@ STOPWORDS_UA = set(base_ua.decode('utf-8').split())
 # EMOJI = set(EMOJI_UNICODE_ENGLISH.values())
 
 
+# noinspection PyUnusedLocal
 @cache_to_file()
 def tokenize(messages: list[str], companion_id, companion_name: str = "Undefined",
              use_cache: bool = True, flush_cache: bool = False) -> list[str]:
@@ -34,7 +35,7 @@ def tokenize(messages: list[str], companion_id, companion_name: str = "Undefined
 
     tokenized_list = []
 
-    if len(messages) == 0:
+    if not messages:
         return []
 
     for message in progress_bar(messages, prefix=f'Analyzing {companion_name} messages:'):
