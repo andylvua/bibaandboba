@@ -3,3 +3,4 @@ nltk~=3.7
 setuptools~=63.1.0
 pytest~=7.1.2
 BibaAndBoba==1.1.2
+googletrans~=3.1.0a0
