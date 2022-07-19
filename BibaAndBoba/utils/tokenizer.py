@@ -4,6 +4,7 @@ from nltk.tokenize import word_tokenize
 
 from BibaAndBoba.utils.cacher import cache_to_file
 from BibaAndBoba.utils.progress_bar import progress_bar
+from BibaAndBoba.utils.languages import get_supported_language
 
 # from emoji.unicode_codes import EMOJI_UNICODE_ENGLISH
 
@@ -32,6 +33,7 @@ def tokenize(messages: list[str], companion_id, companion_name: str = "Undefined
     :param flush_cache: bool: Clear the cache of a given tokenizer. Defaults to False.
     :return: A list of tokens for each message
     """
+    language = get_supported_language(messages)
 
     tokenized_list = []
 
@@ -39,7 +41,7 @@ def tokenize(messages: list[str], companion_id, companion_name: str = "Undefined
         return []
 
     for message in progress_bar(messages, prefix=f'Analyzing {companion_name} messages:'):
-        tokenized = word_tokenize(message, language='russian')
+        tokenized = word_tokenize(message, language=language)
         for token in tokenized:
             token = token.lower()
             if token not in STOPWORDS_UA and not any(word in token for word in STOPWORDS):
