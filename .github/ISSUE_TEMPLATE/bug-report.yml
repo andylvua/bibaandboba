@@ -1,0 +1,68 @@
+name: Bug Report
+description: Create a report to help improve the project
+title: "[BUG]"
+labels: ["bug"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Thanks for reporting issues of BibaAndBoba!
+
+        To make it easier for me to help you please enter detailed information below.
+  
+  - type: textarea
+    id: bug-description
+    attributes:
+      label: "Bug description"
+      description: "A clear and concise description of what the bug is."
+      placeholder: "Example: I want to do X, but I'm facing a bug."
+    validations:
+      required: true
+      
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Steps to Reproduce
+      value: |
+        1. 
+        2.
+        3.
+    validations:
+      required: true
+        
+  - type: textarea
+    id: expected-behaviour
+    attributes:
+      label: Expected behaviour
+      description: What should happen?
+    validations:
+      required: true
+      
+  - type: textarea
+    id: actual-behaviour
+    attributes:
+      label: Actual behaviour
+      description: What happens instead?
+    validations:
+      required: true
+      
+  - type: input
+    id: operating-system
+    attributes:
+      label: Operating System
+    validations: 
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log output
+      description: Insert logs here (if necessary). This will be automatically formatted into code, so no need for backticks.
+      render: python
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: You may provide any other additional context to the bug here.
