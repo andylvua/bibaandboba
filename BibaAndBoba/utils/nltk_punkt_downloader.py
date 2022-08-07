@@ -11,7 +11,10 @@ def download_punkt():
     try:
         _create_unverified_https_context = ssl._create_unverified_context
     except AttributeError:
-        pass
+        logger.warning(
+            "Warning, ssl unverified context is not available.\n"
+            "Consider installing punkt tokenizer from NLTK manually. Help: https://www.nltk.org/data.html"
+        )
     else:
         ssl._create_default_https_context = _create_unverified_https_context
 
