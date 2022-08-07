@@ -57,14 +57,14 @@ class Comparator:
                         corr += (1 / (i + 1)) - quotient_diff
                     else:
                         corr += 1 / (i + 1)
-                    self.__same_words.add(word_1)
                 else:
                     continue
 
-        result = (corr / self.__max_correlation) * 100
-        return ceil(result)
+        max_corr = _max_correlation(len(self.__person1_freq_dist["Word"]))
+        result = (corr / max_corr)
+        return result
 
-    def alternate_correlation(self) -> float:
+    def __alternate_correlation(self) -> float:
         """
         The alternate_correlation function calculates the correlation between two people.
         It does this by calculating the number of same words in both person's word list,
@@ -77,28 +77,31 @@ class Comparator:
         :return: The correlation between the two people
         """
         corr = 0
-        for i in range(len(self.__person1_freq_dist)):
-            if (self.__person1_freq_dist.at[i, "Word"]
-                in self.__person2_freq_dist["Word"].values):
-                corr += self.__person1_freq_dist.at[i, "Quotient"]
-        for i in range(len(self.__person2_freq_dist)):
-            if (self.__person2_freq_dist.at[i, "Word"]
-                in self.__person1_freq_dist["Word"].values):
-                corr += self.__person2_freq_dist.at[i, "Quotient"]
+        for row in self.__person1_freq_dist.itertuples(index=False):
+            if row.Word in self.__person2_freq_dist["Word"].values:
+                corr += row.Quotient
+        for row in self.__person2_freq_dist.itertuples(index=False):
+            if row.Word in self.__person1_freq_dist["Word"].values:
+                corr += row.Quotient
+
         return corr / 2
 
     def get_correlation(self) -> float:
         """
         The get_correlation function returns the correlation between two people.
 
+        :param use_alternate_correlation: Use the alternate correlation method
         :param self: Access the class attributes
         :return: The correlation between the two columns
         """
-        return self.__correlation_percent
+        if use_alternate_correlation:
+            return self.__alternate_correlation()
+        else:
+            return self.__correlation()
 
     def get_same_words(self) -> set:
         """
-        The get_same_words function returns a list of words that are the same for both people.
+        The get_same_words function returns a set of words that are the same for both people.
 
         :param self: Access the attributes and methods of the class in which it is used
         :return: A list of words that are the same as the word in question
