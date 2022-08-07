@@ -89,12 +89,10 @@ class Comparator:
         The find_same_words function finds the words that are the same for both people.
 
         :param self: Access the attributes and methods of the class in which it is used
-        :return: A list of words that are the same as the word in question
+        :return: A set of words that are the same as the word in question
         """
-        same_words = set()
-        for word in self.__person1_freq_dist["Word"]:
-            if word in self.__person2_freq_dist["Word"].values:
-                same_words.add(word)
+        same_words = set(self.__person1_freq_dist["Word"]) & set(self.__person2_freq_dist["Word"])
+
         return same_words
 
     def get_correlation(self, use_alternate_correlation: bool = True) -> float:
