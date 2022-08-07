@@ -1,5 +1,3 @@
-from math import ceil
-
 from BibaAndBoba.biba_and_boba import BibaAndBoba
 
 
@@ -23,9 +21,14 @@ class Comparator:
     people and the words that are the same for both of them.
     """
 
-    def __init__(self, person1: BibaAndBoba, person2: BibaAndBoba, limit: int = 10):
+    def __init__(
+            self,
+            person1: BibaAndBoba,
+            person2: BibaAndBoba,
+            limit: int = 10,
+    ):
         if not isinstance(person1, BibaAndBoba) or not isinstance(person2, BibaAndBoba):
-            raise TypeError("You must pass a BibaAndBoba objects as the arguments")
+            raise TypeError("You must pass the BibaAndBoba objects as the arguments")
 
         self.__person1_freq_dist = person1.parasite_words(limit=limit)
         self.__person2_freq_dist = person2.parasite_words(limit=limit)
