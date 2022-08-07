@@ -12,12 +12,12 @@ def test_type_error():
     with pytest.raises(Exception) as e_info:
         # noinspection PyTypeChecker
         Comparator("", "")
-    assert "You must pass a BibaAndBoba object as the argument" in str(e_info.value)
+    assert "You must pass the BibaAndBoba objects as the arguments" in str(e_info.value)
 
 
 def test_get_correlation(biba_and_boba_comparator):
-    correlation_actual = biba_and_boba_comparator.get_correlation()
-    correlation_expected = 100
+    correlation_actual = biba_and_boba_comparator.get_correlation(use_alternate_correlation=False)
+    correlation_expected = 1.0
 
     assert correlation_actual == correlation_expected
 
