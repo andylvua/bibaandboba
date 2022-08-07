@@ -16,8 +16,14 @@ class BibaAndBoba:
     the files.
     """
 
-    def __init__(self, file_1: FileInput, file_2: FileInput, subtraction_threshold: int = 3,
-                 use_cache: bool = True, flush_cache: bool = False):
+    def __init__(
+        self,
+        file_1: FileInput,
+        file_2: FileInput,
+        subtraction_threshold: int = 3,
+        use_cache: bool = True,
+        flush_cache: bool = False,
+    ):
         """
         The __init__ function is called when an instance of the class is created.
         It initializes all the variables that are unique to each instance.
@@ -35,7 +41,9 @@ class BibaAndBoba:
         :raises: ValueError: If files are identical
         """
         if not use_cache:
-            logger.warning("Warning, cache is disabled. This may significantly slow down the process.\n")
+            logger.warning(
+                "Warning, cache is disabled. This may significantly slow down the process.\n"
+            )
 
         file_1 = Reader(file_1)
         file_2 = Reader(file_2)
@@ -48,11 +56,21 @@ class BibaAndBoba:
         self.__person_1_name = file_1.get_companion_name()
         self.__person_2_name = file_2.get_companion_name()
 
-        self.__tokenized_person_1 = tokenize(file_1.get_messages(), file_1_companion_id, self.__person_1_name,
-                                             use_cache=use_cache, flush_cache=flush_cache)
+        self.__tokenized_person_1 = tokenize(
+            file_1.get_messages(),
+            file_1_companion_id,
+            self.__person_1_name,
+            use_cache=use_cache,
+            flush_cache=flush_cache,
+        )
 
-        self.__tokenized_person_2 = tokenize(file_2.get_messages(), file_2_companion_id, self.__person_2_name,
-                                             use_cache=use_cache, flush_cache=flush_cache)
+        self.__tokenized_person_2 = tokenize(
+            file_2.get_messages(),
+            file_2_companion_id,
+            self.__person_2_name,
+            use_cache=use_cache,
+            flush_cache=flush_cache,
+        )
 
         self.__difference_words = self.__subtraction(threshold=subtraction_threshold)
 
@@ -85,9 +103,9 @@ class BibaAndBoba:
         :return: A dataframe with the most common words and their counts.
         """
         fdist = FreqDist(self.__difference_words)
-        df = pd.DataFrame(fdist.most_common(limit), columns=['Word', 'Count'])
+        df = pd.DataFrame(fdist.most_common(limit), columns=["Word", "Count"])
 
-        df["Quotient"] = (df["Count"] / len(self.__tokenized_person_1)) * 100
+        df["Quotient"] = df["Count"] / df.sum(axis=0)["Count"]
 
         return df
 
