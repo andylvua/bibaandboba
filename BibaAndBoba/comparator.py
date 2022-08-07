@@ -32,9 +32,7 @@ class Comparator:
 
         self.__person1_freq_dist = person1.parasite_words(limit=limit)
         self.__person2_freq_dist = person2.parasite_words(limit=limit)
-        self.__max_correlation = _max_correlation(len(self.__person1_freq_dist["Word"]))
-        self.__same_words = set()
-        self.__correlation_percent = self.__correlation()
+        self.__same_words = self.__find_same_words()
 
     def __correlation(self) -> float:
         """
@@ -86,7 +84,20 @@ class Comparator:
 
         return corr / 2
 
-    def get_correlation(self) -> float:
+    def __find_same_words(self) -> set:
+        """
+        The find_same_words function finds the words that are the same for both people.
+
+        :param self: Access the attributes and methods of the class in which it is used
+        :return: A list of words that are the same as the word in question
+        """
+        same_words = set()
+        for word in self.__person1_freq_dist["Word"]:
+            if word in self.__person2_freq_dist["Word"].values:
+                same_words.add(word)
+        return same_words
+
+    def get_correlation(self, use_alternate_correlation: bool = True) -> float:
         """
         The get_correlation function returns the correlation between two people.
 
