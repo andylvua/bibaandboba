@@ -38,8 +38,9 @@ You can also install `BibaAndBoba` from source, though this is usually not neces
 
 ``` shell
 $ git clone https://github.com/andylvua/BibaAndBoba.git
-$ cd BibaAndBoba
+$ cd bibaandboba
 $ python setup.py install
+$ pip3 install -e requirements.txt
 ```
 
 ### Preparing Telegram chat history files

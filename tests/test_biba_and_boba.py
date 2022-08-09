@@ -8,7 +8,7 @@ def test_freq_dist(biba_and_boba):
         {
             'Word': ["hi", "павло"],
             'Count': [1, 1],
-            'Quotient': [50.0, 50.0],
+            'Quotient': [0.5, 0.5],
         }
     )
 

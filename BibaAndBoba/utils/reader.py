@@ -9,16 +9,16 @@ def _parse_file_input(file: FileInput):
     if isinstance(file, str):
         if not file.endswith('.json'):
             extension = file.split('.')[-1]
-            raise ValueError(f"File must be json, not {extension}")
+            raise TypeError(f"File must be json, not {extension}")
         return json.load(open(file, "rb"))
-    if isinstance(file, bytes):
+    elif isinstance(file, bytes):
         return json.loads(file.decode("utf-8"))
-    if isinstance(file, (BufferedReader, TextIOWrapper)):
+    elif isinstance(file, (BufferedReader, TextIOWrapper)):
         return json.load(file)
-    if isinstance(file, BytesIO):
+    elif isinstance(file, BytesIO):
         return json.loads(file.getvalue())
-    if isinstance(file, TextIOWrapper):
-        return json.load(file)
+    else:
+        raise TypeError("File must be a string, a bytes, a BufferedReader, a BytesIO, or a TextIOWrapper")
 
 
 class Reader:
